@@ -43,7 +43,7 @@ def parse_tagged_csv(csv_file):
     docs = []
     index = 0
     for row in data:
-        tags.append(row[0])
+        tags.append(int(row[0]))
         docs.append({'id': index, 'title': row[1], 'text': row[2]})
         index += 1
 
