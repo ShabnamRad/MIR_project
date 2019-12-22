@@ -50,7 +50,7 @@ class Index(object):
         self.raw_docs = []
         self.doc_similarity = dict()
 
-    def get_tf(self, token, doc_id, label):
+    def get_tf(self, token, doc_id, label = 'text'):
         if doc_id not in self.index[token]:
             return 0
         return len(self.index[token][doc_id].get(label, []))
@@ -78,6 +78,7 @@ class Index(object):
 
     def add(self, doc_id, label, text):
         tokens = pre_process.process(text, self.ispersian, remove_stop_words=False)
+
         count = dict()
         for i, token in enumerate(tokens):
             if token not in self.index:
@@ -101,15 +102,20 @@ class Index(object):
         if doc_id not in self.doc_similarity:
             self.doc_similarity[doc_id] = dict()
         self.doc_similarity[doc_id][label] = math.sqrt(sum([v * v for v in count.values()]))
+        return tokens
 
     def add_doc(self, doc):
         doc_id = doc['id']
         if doc_id in self.doc_set.keys():
             return
 
-        self.doc_set[doc_id] = 1
+        self.doc_set[doc_id] = dict()
         self.add(doc_id, 'title', doc['title'])
-        self.add(doc_id, 'text', doc['text'])
+        tokens = self.add(doc_id, 'text', doc['text'])
+
+        self.doc_set[doc_id]['tf'] = dict()
+        for token in set(tokens):
+            self.doc_set[doc_id]['tf'][token] = self.get_tf(token, doc_id)
 
     def remove_doc(self, doc):
         doc_id = doc['id']

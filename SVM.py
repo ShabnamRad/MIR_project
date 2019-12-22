@@ -26,6 +26,20 @@ clf = SVC(C=0.5)
 clf.fit(train_x, train_y)
 print("#")
 pred = clf.predict(test_x)
+print("Accuracy: ", clf.score(test_x, test_y))
 print("Precision: ", precision_score(test_y, pred, average=None))
 print("Recall: ", recall_score(test_y, pred,  average=None))
 
+# c = 0.5
+#Accuracy:  0.8355555555555556
+#Precision:  [0.91346154 0.87398374 0.9273743  0.67790262]
+#Recall:  [0.85972851 0.95132743 0.664      0.89162562]
+
+# c= 1.5
+#Precision:  [0.92344498 0.93886463 0.9086758  0.74485597]
+#Recall:  [0.87330317 0.95132743 0.796      0.89162562]
+
+#c = 2
+# Accuracy:  0.8777777777777778
+# Precision:  [0.91981132 0.93859649 0.90178571 0.75847458]
+# Recall:  [0.88235294 0.94690265 0.808      0.8817734 ]
