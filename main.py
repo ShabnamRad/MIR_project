@@ -45,17 +45,18 @@ def spell_correction(q):
     print(indexing.spell_correction(q, index))
 
 
-def search(q):
-    print(indexing.search(q, index))
-
-
 if __name__ == '__main__':
 
-    lang = input("language:")
-    if lang == "persian":
-        index = indexing.Index("persian")
-    else:
-        index = indexing.Index("english")
+    while True:
+        lang = input("language:")
+        if lang == "persian":
+            index = indexing.Index("persian")
+            break
+        elif lang == "english":
+            index = indexing.Index("english")
+            break
+        else:
+            print("Unknown Language")
     index.build()
 
     while True:
@@ -82,4 +83,7 @@ if __name__ == '__main__':
             print(spell_correction(q))
         elif fun == 'search':
             q = input("query:")
-            print(search(q))
+            t = 0
+            if lang == "english":
+                t = input("subject:")
+            print(indexing.search(q, t, index))

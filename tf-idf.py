@@ -7,6 +7,7 @@ def get_tags_tf_idf():
     print("#")
     index = Index("english")
     index.build_with_docs(docs)
+    index.save_to_file("index-train.pkl")
     print("#####")
     terms = index.index.keys()
     vectors = []
