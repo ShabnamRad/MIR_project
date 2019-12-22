@@ -57,11 +57,19 @@ for i in range(len(test_y)):
     if pred[i] == test_y[i]:
         acc += 1
 
+precision =  precision_score(test_y, pred, average=None)
+recall = recall_score(test_y, pred,  average=None)
 print("Accuracy: ", 1.0 * acc / len(test_y))
-print("Precision: ", precision_score(test_y, pred, average=None))
-print("Recall: ", recall_score(test_y, pred,  average=None))
+print("Precision: ", precision)
+print("Recall: ", recall)
 
 
+f1 = []
+for i in range(4):
+    tmp = (2.0 * precision[i] * recall[i]) / (precision[i] + recall[i])
+    f1.append(tmp)
+
+print("F1: ", f1)
 # k = 1
 #Accuracy:  0.8222222222222222
 #Precision:  [0.8173913  0.91363636 0.80578512 0.75      ]
