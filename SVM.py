@@ -22,10 +22,12 @@ test_x = vectors[n_train:n]
 test_y = tags[n_train:n]
 
 print("#")
-clf = SVC(C=0.5)
+clf = SVC(C=1)
 clf.fit(train_x, train_y)
 print("#")
 pred = clf.predict(test_x)
 print("Precision: ", precision_score(test_y, pred, average=None))
 print("Recall: ", recall_score(test_y, pred,  average=None))
 
+
+# for c=1 : Precision:  [0.91549296 0.91561181 0.90990991 0.78070175] Recall:  [0.88235294 0.96017699 0.808 0.87684729]

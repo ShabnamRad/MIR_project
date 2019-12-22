@@ -51,6 +51,8 @@ class Index(object):
         self.doc_similarity = dict()
 
     def get_tf(self, token, doc_id, label):
+        if token not in self.index:
+            return 0
         if doc_id not in self.index[token]:
             return 0
         return len(self.index[token][doc_id].get(label, []))
@@ -208,13 +210,18 @@ def edit_distance(x, y):
     return d[n][m]
 
 
-def search(query, index):
+def search(query, tag, index):
+    if tag:
+        with open('phase1_tags.data', 'rb') as f:
+            tags = pickle.load(f)
     tokens = spell_correction(query, index).split()
     docs = set()
     for w in tokens:
-        postinglist = index.get_posting_list(w)
-        docs = docs.union(set(postinglist.keys()))
-        print(postinglist.keys())
+        posting_list = index.get_posting_list(w)
+        posting_list = set(posting_list.keys())
+        if tag:
+            posting_list = set(filter(lambda x: tags[x] == tag, posting_list))
+        docs = docs.union(posting_list)
     scores = {}
 
     q = dict()
