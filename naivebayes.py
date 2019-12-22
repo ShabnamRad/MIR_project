@@ -13,8 +13,7 @@ index.build_with_docs(docs)
 print("#####")
 terms = index.index.keys()
 
-
-
+test_tags, test_docs = parse_tagged_csv('phase2_test.csv')
 categories = [1, 2, 3, 4]
 
 def trainNB():
@@ -47,6 +46,7 @@ print("before train")
 class_priority, conditional_probability = trainNB()
 print("after train")
 
+
 def predictNBBatch(docs):
     answers = list()
     for document in docs:
@@ -64,29 +64,37 @@ def predictNBBatch(docs):
         answers.append(predicted_class)
     return answers
 
-def predictNB(document):
-    return predictNBBatch([document])[0]
 
-
-pred = []
+pred = predictNBBatch(test_docs)
 acc = 0
-i = 0
-for doc in docs:
-    if i % 100 == 0:
-        print(i)
-    i += 1
-    p = predictNB(doc)
-    pred.append(p)
 
-
-for i in range(len(tags)):
-    if pred[i] == tags[i]:
+for i in range(len(test_tags)):
+    if pred[i] == test_tags[i]:
         acc += 1
 
-print("Accuracy: ", 1.0 * acc / len(tags))
-print("Precision: ", precision_score(tags, pred, average=None))
-print("Recall: ", recall_score(tags, pred,  average=None))
+precision = precision_score(test_tags, pred, average=None)
+recall = recall_score(test_tags, pred,  average=None)
+print("Accuracy: ", 1.0 * acc / len(test_tags))
+print("Precision: ", precision)
+print("Recall: ", recall)
 
+
+
+f1 = []
+for i in range(4):
+    tmp = (2.0 * precision[i] * recall[i]) / (precision[i] + recall[i])
+    f1.append(tmp)
+
+print("F1: ", f1)
+
+#train
 # Accuracy:  0.9257777777777778
 # Precision:  [0.94922232 0.96336677 0.89238264 0.898365  ]
 # Recall:  [0.92222222 0.98177778 0.89555556 0.90355556]
+
+
+#test:
+# Accuracy:  0.858
+# Precision:  [0.91101695 0.91119691 0.78461538 0.82857143]
+# Recall:  [0.86  0.944 0.816 0.812]
+# F1:  [0.8847736625514404, 0.9273084479371315, 0.7999999999999999, 0.8202020202020203]
