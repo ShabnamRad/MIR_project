@@ -22,7 +22,7 @@ test_x = vectors[n_train:n]
 test_y = tags[n_train:n]
 
 print("#")
-clf = SVC(C=1)
+clf = SVC(C=0.5)
 clf.fit(train_x, train_y)
 print("#")
 pred = clf.predict(test_x)

@@ -5,7 +5,6 @@ from RF import random_forrest
 
 
 def get_english_docs_tags():
-    print("start")
     english_docs = utils.parse_csv('English.csv')
     index = Index("english")
     index = index.load_from_file("index-en.pkl")
