@@ -1,2 +1,4 @@
+scrapy
+selenium
 hazm==0.7.0
 nltk==3.4.5
