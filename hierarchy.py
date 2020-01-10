@@ -20,7 +20,7 @@ n, m = vectors.shape
 
 def test_param():
     plt.figure(figsize=(10, 7))
-    plt.title("TfIDF")
+    plt.title("word2vec")
     dend = shc.dendrogram(shc.linkage(vectors, method='ward'))
     plt.show()
 
@@ -34,8 +34,7 @@ def test(k):
         for i in range(len(ids)):
             f.write(str(ids[i]) + ", " + str(pred[i]) + "\n")
 
-
-test(11)
-
-#w2v 11
+test_param()
+#test(8)
+#w2v 8
 #tfidf 9

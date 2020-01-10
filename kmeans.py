@@ -5,7 +5,7 @@ import csv
 import matplotlib.pyplot as plt
 vectors = []
 tags = []
-with open('vectors3.data', 'rb') as f:
+with open('word2vec.data', 'rb') as f:
     vectors = pickle.load(f)
 
 
@@ -19,7 +19,7 @@ n, m = vectors.shape
 def find_param():
     sse = []
     list_k = []
-    for k in range(2, 20):
+    for k in range(2, 40):
 
         km = KMeans(n_clusters=k)
         km.fit(vectors)
@@ -41,7 +41,7 @@ def test(k):
     pred = km.predict(vectors)
     print(pred)
 
-    with open('kmean-tfidf.csv', mode='w') as f:
+    with open('kmean-word2vec.csv', mode='w') as f:
         for i in range(len(ids)):
             f.write(str(ids[i]) + ", " + str(pred[i]) + "\n")
-find_param()
+test(10)

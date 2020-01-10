@@ -36,8 +36,8 @@ def test(k):
         for i in range(len(ids)):
             f.write(str(ids[i]) + ", " + str(pred[i]) + "\n")
 
-test(11)
+test(15)
 
 
 #tfidf = 11
-#w2v 11
+#w2v 15
