@@ -36,3 +36,6 @@ def test(k):
 
 
 test(11)
+
+#w2v 11
+#tfidf 9
