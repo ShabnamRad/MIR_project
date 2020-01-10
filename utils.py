@@ -48,3 +48,17 @@ def parse_tagged_csv(csv_file):
         index += 1
 
     return tags, docs
+
+def parse_csv_cluster(csv_file):
+    with open(csv_file, encoding="latin1") as file:
+        data = list(csv.reader(file))
+
+    data = data[1:]
+    ids = []
+    docs = []
+    index = 0
+    for row in data:
+        ids.append(int(row[0]))
+        docs.append({'id': index, 'title': "", 'text': row[1]})
+        index += 1
+    return ids, docs
