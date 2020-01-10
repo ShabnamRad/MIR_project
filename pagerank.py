@@ -2,7 +2,7 @@ import numpy as np
 import json
 
 
-def add_page_rank(alpha=0.85):
+def get_page_rank(alpha=0.15):
     with open('crawler/crawled_papers_info.json', mode='r', encoding='utf-8') as f:
         result = json.load(f)
     g = dict()
@@ -49,4 +49,4 @@ def add_page_rank(alpha=0.85):
             f.write(str(i) + ") PR: " + str(pr) + ", Title: " + title + ", id: " + pid + "\n")
 
 
-add_page_rank()
+get_page_rank()
