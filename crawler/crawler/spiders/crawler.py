@@ -48,7 +48,6 @@ class SemanticScholarSpider(scrapy.Spider):
             old = json.load(f)
         with open(self.DATA_FILENAME, mode='w', encoding='utf-8') as f:
             old.append(data)
-            old.append("\n")
             json.dump(old, f)
         yield data
 
